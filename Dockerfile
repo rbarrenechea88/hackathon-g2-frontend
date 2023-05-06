@@ -1,7 +1,7 @@
 ##### Ambiente de Build
 FROM node:latest as react-build
 
-ARG BACKEND_URL=${BACKEND_URL}
+ARG BACKEND_URL
 
 WORKDIR /app
 COPY . ./
@@ -27,6 +27,8 @@ COPY --from=react-build /app/build /usr/share/nginx/html
 
 ENV PORT 8080
 ENV HOST 0.0.0.0
+ENV BACKEND_URL=$BACKEND_URL
 EXPOSE 8080
+
 
 CMD sh -c "envsubst '\$PORT' < /etc/nginx/conf.d/configfile.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"

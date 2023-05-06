@@ -4,9 +4,9 @@ import "./App.css";
 
 function App() {
    	const [data, setData] = useState([]);
-
+  const backend_url = process.env.BACKEND_URL
 	useEffect(() => {
-		fetch("$BACKEND_URL")
+		fetch(backend_url)
 		 .then((res) => res.json())
       		 .then((result) => setData(result))
       		 .catch((err) => console.log("error"));

@@ -22,7 +22,7 @@ jobs:
 
         - name: Build Imag & Push para Google Registry
           run: |
-            docker build -t ${{ vars.GOOGLE_ARTIFACT }}/${{ vars.GOOGLE_PROJECT_ID }}/${{ vars.GOOGLE_REPONAME }}/${{ vars.GOOGLE_MYAPP }}:latest .
+            docker build --build-arg=${{ vars.BACKEND_URL}} -t ${{ vars.GOOGLE_ARTIFACT }}/${{ vars.GOOGLE_PROJECT_ID }}/${{ vars.GOOGLE_REPONAME }}/${{ vars.GOOGLE_MYAPP }}:latest .
             docker push ${{ vars.GOOGLE_ARTIFACT }}/${{ vars.GOOGLE_PROJECT_ID }}/${{ vars.GOOGLE_REPONAME }}/${{ vars.GOOGLE_MYAPP }}:latest
         - name: Show file
           run: cat src/App.js
@@ -48,6 +48,6 @@ jobs:
           image:   ${{ vars.GOOGLE_ARTIFACT }}/${{ vars.GOOGLE_PROJECT_ID }}/${{ vars.GOOGLE_REPONAME }}/${{ vars.GOOGLE_MYAPP }}:latest
           flags: '--allow-unauthenticated'
           env_vars: |
-            BACKEND=${{ vars.BACKEND_URL }}
+            BACKEND_URL=${{ vars.BACKEND_URL }}
       - name: Test Prod
         run: 'curl "${{ steps.deploy.outputs.url }}"'
