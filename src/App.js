@@ -4,7 +4,8 @@ import "./App.css";
 
 function App() {
    	const [data, setData] = useState([]);
-  const backend_url = process.env.BACKEND_URL
+  console.log("env: ", process.env.REACT_APP_BACKEND_URL)  
+  const backend_url = process.env.REACT_APP_BACKEND_URL
 	useEffect(() => {
 		fetch(backend_url)
 		 .then((res) => res.json())
