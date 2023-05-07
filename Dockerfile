@@ -14,7 +14,7 @@ RUN cat src/App.js
 
 RUN yarn
 
-RUN yarn build
+RUN BACKEND_URL=$BACKEND_URL yarn build
 
 RUN ls /app/build
 
