@@ -14,7 +14,7 @@ RUN cat src/App.js
 
 RUN yarn
 
-RUN BACKEND_URL=$BACKEND_URL yarn build
+RUN REACT_APP_BACKEND_URL=$BACKEND_URL yarn build
 
 RUN ls /app/build
 
@@ -27,7 +27,7 @@ COPY --from=react-build /app/build /usr/share/nginx/html
 
 ENV PORT 8080
 ENV HOST 0.0.0.0
-ENV BACKEND_URL=$BACKEND_URL
+ENV REACT_APP_BACKEND_URL=$BACKEND_URL
 EXPOSE 8080
 
 
